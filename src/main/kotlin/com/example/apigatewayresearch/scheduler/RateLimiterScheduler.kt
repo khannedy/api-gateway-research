@@ -60,8 +60,8 @@ class RateLimiterScheduler(
         metric: RateLimiterMetricProperties.RateLimiterMetricDetailProperties,
         name: String
     ): Mono<Int> {
-        return if (maxLimit >= metric.maxLimit) {
-            rateLimiterService.changeMaxLimit(name, metric.maxLimit)
+        return if (maxLimit >= metric.maxLimitForPeriod) {
+            rateLimiterService.changeMaxLimit(name, metric.maxLimitForPeriod)
         } else {
             rateLimiterService.changeMaxLimit(name, maxLimit * 2)
         }
@@ -73,8 +73,8 @@ class RateLimiterScheduler(
         name: String
     ): Mono<Int> {
         val newMaxLimit = maxLimit / 2
-        return if (newMaxLimit < metric.minLimit) {
-            rateLimiterService.changeMaxLimit(name, metric.minLimit)
+        return if (newMaxLimit < metric.minLimitForPeriod) {
+            rateLimiterService.changeMaxLimit(name, metric.minLimitForPeriod)
         } else {
             rateLimiterService.changeMaxLimit(name, newMaxLimit)
         }

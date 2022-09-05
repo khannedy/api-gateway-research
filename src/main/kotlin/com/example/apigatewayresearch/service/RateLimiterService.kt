@@ -19,7 +19,7 @@ class RateLimiterService(
             Mono.zip(
                 reactiveStringRedisTemplate.opsForValue().setIfAbsent("${key}_duration", "0"),
                 reactiveStringRedisTemplate.opsForValue().setIfAbsent("${key}_request", "0"),
-                reactiveStringRedisTemplate.opsForValue().setIfAbsent("${key}_max_limit", value.maxLimit.toString()),
+                reactiveStringRedisTemplate.opsForValue().setIfAbsent("${key}_max_limit", value.maxLimitForPeriod.toString()),
             ).block()
         }
     }

@@ -9,8 +9,9 @@ data class RateLimiterMetricProperties(
 ) {
 
     data class RateLimiterMetricDetailProperties(
-        var maxLimit: Int = 1000,
-        var minLimit: Int = 10,
+        var maxLimitForPeriod: Int = 10,
+        var minLimitForPeriod: Int = 10,
+        var limitRefreshPeriod: Duration = Duration.ofMinutes(1),
         var slowDuration: Duration = Duration.ofMillis(500),
     )
 
